@@ -1,0 +1,68 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.8'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id "io.freefair.lombok" version "8.6"
+    id "com.qqviaja.gradle.MybatisGenerator" version "2.5"
+}
+
+group = 'co.jp'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = "${projectDir}/src/main/resources/mybatis/generatorConfig.xml"
+    mybatisProperties = ['jdbcUrl'        : 'jdbc:postgresql://database:5432/application',
+                         'jdbcDriverClass': 'org.postgresql.Driver',
+                         'jdbcUsername'   : 'postgres',
+                         'jdbcPassword'   : 'password',
+                         'projectDir'     : "${projectDir}",
+    ]
+
+    dependencies {
+        mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.4.2'
+        mybatisGenerator 'org.postgresql:postgresql:42.7.3'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+    implementation 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.2'
+    implementation 'org.postgresql:postgresql:42.7.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+bootRun {
+	systemProperties = System.properties
+	jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"]
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams false
+        events 'started', 'skipped', 'passed', 'failed'
+        exceptionFormat 'full'
+    }
+}

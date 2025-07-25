@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://database:5432/application
+    username: postgres
+    password: password
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    "[jp.co.claudioprogress.piita.daos]": DEBUG

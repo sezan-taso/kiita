@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <context id="PostgresTables" targetRuntime="MyBatis3DynamicSql">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+
+        <!-- DB接続 -->
+        <jdbcConnection
+                driverClass="${jdbcDriverClass}"
+                connectionURL="${jdbcUrl}"
+                userId="${jdbcUsername}"
+                password="${jdbcPassword}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!-- 日時変換設定 -->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+        
+        <!-- ドメインモデルを生成する設定 -->
+        <javaModelGenerator targetPackage="jp.co.backend.models.generated" targetProject="${projectDir}/src/main/java">
+        </javaModelGenerator>
+
+        <!-- マッパークラスを生成する設定 -->
+        <javaClientGenerator targetPackage="jp.co.backend.dao.generated"
+                             targetProject="${projectDir}/src/main/java">
+        </javaClientGenerator>
+
+        <!-- 生成対象とするテーブル -->
+        <table schema="public" tableName="users" mapperName="UserGeneratedMapper">
+            <property name="dynamicSqlSupportClassName" value="UserGeneratedDynamicSqlSupport"/>
+            <domainObjectRenamingRule searchString="Users" replaceString="User"/>
+            <ignoreColumn column="created_at"/>
+            <ignoreColumn column="updated_at"/>
+        </table>
+    </context>
+</generatorConfiguration>

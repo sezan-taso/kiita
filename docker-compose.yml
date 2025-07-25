@@ -1,0 +1,68 @@
+x-template: &flyway-template
+  image: flyway/flyway:10.16
+  volumes:
+    - ./database/sql:/flyway/sql
+    - ./database/conf:/flyway/conf
+  depends_on:
+    - database
+
+services:
+  database:
+    image: postgres:16.3
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: application
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+      TZ: Asia/Tokyo
+    volumes:
+      - ./database/psql:/var/lib/postgresql/data
+
+  flyway-info:
+    <<: *flyway-template
+    command: info
+    profiles:
+      - extra
+
+  flyway-migrate:
+    <<: *flyway-template
+    command: migrate
+    profiles:
+      - extra
+
+  flyway-clean:
+    <<: *flyway-template
+    command: clean
+    profiles:
+      - extra
+
+  flyway-repair:
+    <<: *flyway-template
+    command: repair
+    profiles:
+      - extra
+
+  backend:
+    hostname: backend
+    build:
+      context: ./backend
+      target: dev
+    volumes:
+      - ./backend:/apps
+    ports:
+      - 8080:8080
+      - 5005:5005
+    tty: true
+    depends_on:
+      - database
+
+  gradle-build:
+    image: gradle:8.4-jdk21
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: ./gradlew build -x test
+    profiles:
+      - extra
