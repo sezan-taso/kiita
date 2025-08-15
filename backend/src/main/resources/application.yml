@@ -11,6 +11,4 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-logging:
-  level:
-    "[jp.co.claudioprogress.piita.daos]": DEBUG
+
