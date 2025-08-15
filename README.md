@@ -44,3 +44,6 @@ docker exec -it application-database-1 psql -U postgres -d application
 ```
 docker-compose run --rm gradle-build
 ```
+
+## ユニットテストの実行
+docker-compose run --rm backend ./gradlew test

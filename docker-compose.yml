@@ -45,7 +45,7 @@ services:
       - extra
 
   flyway-migrate:
-    <<: *flyway-template-ut
+    <<: *flyway-template
     command: migrate
     profiles:
       - extra
