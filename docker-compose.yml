@@ -62,6 +62,30 @@ services:
     profiles:
       - extra
 
+  flyway-info-ut:
+    <<: *flyway-template-ut
+    command: info
+    profiles:
+      - extra
+
+  flyway-migrate-ut:
+    <<: *flyway-template-ut
+    command: migrate
+    profiles:
+      - extra
+
+  flyway-clean-ut:
+    <<: *flyway-template-ut
+    command: clean
+    profiles:
+      - extra
+
+  flyway-repair-ut:
+    <<: *flyway-template-ut
+    command: repair
+    profiles:
+      - extra
+
   backend:
     hostname: backend
     build:

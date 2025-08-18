@@ -16,3 +16,9 @@ CREATE TRIGGER trg_users_updated_at
     ON users
     FOR EACH ROW
 EXECUTE PROCEDURE set_updated_at();
+
+CREATE TRIGGER trg_posts_updated_at
+    BEFORE UPDATE
+    ON posts
+    FOR EACH ROW
+EXECUTE PROCEDURE set_updated_at();

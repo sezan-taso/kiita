@@ -36,5 +36,12 @@
             <ignoreColumn column="created_at"/>
             <ignoreColumn column="updated_at"/>
         </table>
+
+        <table schema="public" tableName="posts" mapperName="PostGeneratedMapper">
+            <property name="dynamicSqlSupportClassName" value="PostGeneratedDynamicSqlSupport"/>
+            <domainObjectRenamingRule searchString="Posts" replaceString="Post"/>
+            <ignoreColumn column="created_at"/>
+            <ignoreColumn column="updated_at"/>
+        </table>
     </context>
 </generatorConfiguration>
