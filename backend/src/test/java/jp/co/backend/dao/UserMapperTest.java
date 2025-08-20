@@ -37,8 +37,8 @@ class UserMapperTest {
 			
 			assertThat(selectedUser1.getId()).isEqualTo(1);
 			assertThat(selectedUser1.getLoginId()).isEqualTo("user1");
-			assertThat(selectedUser1.getPassword()).isEqualTo("password");
-			assertThat(selectedUser1.getDisplayName()).isEqualTo("テスト１");
+			assertThat(selectedUser1.getPassword()).isEqualTo("$2a$10$uBB55DqSI9lRbNHkzQj7q.CMotDKFqbmE.AHsEY2tF2VmhP3cocpC");
+			assertThat(selectedUser1.getDisplayName()).isEqualTo("ユーザー１");
 			assertThat(selectedUser1.getDelFlag()).isFalse();
 			
 			User selectedUser2 = selectedUsers.get(1);

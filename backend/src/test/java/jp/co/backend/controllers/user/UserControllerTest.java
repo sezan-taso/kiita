@@ -43,7 +43,7 @@ class UserControllerTest {
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.openMocks(this);
-		mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
 	}
 	
 	/**
