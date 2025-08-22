@@ -19,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import jakarta.validation.constraints.NotNull;
+import jp.co.backend.exceptions.resource.DuplicatedResourceFoundException;
 import jp.co.backend.exceptions.resource.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -89,4 +90,21 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 		return message;
 	}
 	
+	/**
+	 * {@link DuplicatedResourceFoundException}のハンドリング
+	 * 
+	 * @param exception {@link DuplicatedResourceFoundException}
+	 * @return レスポンス
+	 */
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({DuplicatedResourceFoundException.class})
+	@ResponseBody
+	String handleDuplicatedLoginId(DuplicatedResourceFoundException exception) {
+		String code = exception.getErrorCode();
+		Object[] arguments = {exception.getTarget()};
+		String message = messageSource.getMessage(code, arguments, Locale.JAPAN);
+		log.warn(message, exception);
+		
+		return message;
+	}
 }

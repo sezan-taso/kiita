@@ -1,7 +1,9 @@
 package jp.co.backend.dao;
 
 import static jp.co.backend.dao.generated.UserGeneratedDynamicSqlSupport.id;
+import static jp.co.backend.dao.generated.UserGeneratedDynamicSqlSupport.loginId;
 import static org.mybatis.dynamic.sql.SqlBuilder.isIn;
+import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 import java.util.List;
 
@@ -30,5 +32,15 @@ public interface UserMapper extends UserGeneratedMapper {
 				.orderBy(id);
 			
 		return select(completer);
+	}
+	
+	/**
+	 * 指定したログインIDのユーザー件数を取得
+	 * 
+	 * @param targetLoginId ログインID
+	 * @return ユーザー件数
+	 */
+	default long countByLoginId(String targetLoginId) {
+		return count(c -> c.where(loginId, isEqualTo(targetLoginId)));
 	}
 }

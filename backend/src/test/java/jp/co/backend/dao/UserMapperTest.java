@@ -46,4 +46,23 @@ class UserMapperTest {
 			assertThat(selectedUser2.getId()).isEqualTo(3);
 		}	
 	}
+	
+	/**
+	 * {@link UserMapper#countByLoginId(String)}テスト
+	 */
+	@Nested
+	class CountByLoginIdTest {
+		
+		@Test
+		void 指定したloginIdのレコードあり() {
+			long count = userMapper.countByLoginId("user1");
+			assertThat(count).isEqualTo(1);
+		}
+		
+		@Test
+		void 指定したloginIdのレコードなし() {
+			long count = userMapper.countByLoginId("xxx");
+			assertThat(count).isEqualTo(0);
+		}
+	}
 }
