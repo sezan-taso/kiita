@@ -18,12 +18,12 @@ processors=4
 ## WSL環境構築
 アプリからUbuntsを実行し、以下のコマンドで必要なファイルを配置する
 ```
-git clone https://gitlab.com/progress-all/piita.git
+https://github.com/sezan-taso/kiita.git
 ```
 
 ## VSCodeの起動
 ```
-cd piita
+cd kiita
 code .
 ```
 
