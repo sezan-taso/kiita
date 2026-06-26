@@ -18,7 +18,7 @@ processors=4
 ## WSL環境構築
 アプリからUbuntsを実行し、以下のコマンドで必要なファイルを配置する
 ```
-https://github.com/sezan-taso/kiita.git
+git clone https://github.com/sezan-taso/kiita.git
 ```
 
 ## VSCodeの起動
